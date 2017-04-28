@@ -1,0 +1,39 @@
+{
+  "name": "temperature-display",
+  "version": "1.0.0",
+  "description": "Display temperatures from DS18B20 temperature sensors connected via GPIO on an i2c LED display.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node -r dotenv/config app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Nothing to build.\"",
+    "deploy": "./scripts/deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/euoia/temperature-display"
+  },
+  "keywords": [
+    "nodejs",
+    "GPIO",
+    "temperature",
+    "temperature display",
+    "i2c",
+    "monitor",
+    "brewing",
+    "raspberry pi"
+  ],
+  "author": "James Pickard",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "led-backpack": "https://github.com/euoia/led-backpack",
+    "fs-sync": "^1.0.2",
+    "winston": "^2.3.1",
+    "winston-loggly-bulk": "^1.4.0",
+    "rasp2c": "git://github.com/euoia/node-rasp2c"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0"
+  }
+}
