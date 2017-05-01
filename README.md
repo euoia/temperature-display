@@ -15,3 +15,11 @@ configured as `DEVICES`.
 
 This program is intended to run on a Raspberry Pi, but may work in other
 environments.
+
+## Start on boot (systemd)
+
+`
+sudo cp scripts/temperature-display.service /lib/systemd/system
+sudo systemctl enable temperature-display.service
+sudo systemctl start temperature-display.service
+`
