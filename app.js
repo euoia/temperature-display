@@ -19,6 +19,9 @@ function showDeviceTemperature (deviceIdx) {
     temperatureSensor.readTemperature(device.path)
       .then(celsius => {
         log.info(`Displaying ${celsius}°C for ${device.location}.`);
+
+        // TODO: Add enableColon to temperatureDisplay.
+        ledBackpack.enableColon();
         temperatureDisplay.displayTemperature(celsius)
 
         // After a configurable period, show the next device temperature.
@@ -28,8 +31,8 @@ function showDeviceTemperature (deviceIdx) {
 
   // Show the index.
   ledBackpack.clear();
-  ledBackpack.enableColon();
-  ledBackpack.setDigit(0, deviceIdx + 1);
+  ledBackpack.disableColon();
+  ledBackpack.setDigit(4, deviceIdx + 1);
 
   // Then show the temperature.
   setTimeout(showTemperature, config.displayIndexMilliseconds);
