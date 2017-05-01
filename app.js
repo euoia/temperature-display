@@ -9,7 +9,7 @@ const temperatureDisplay = require('@euoia/led-backpack/temperature');
 // Show the device index and then the device temperature.
 // After completion, call itself with the next index.
 function showDeviceTemperature (deviceIdx) {
-  if (deviceIdx > config.devices.length) {
+  if (deviceIdx >= config.devices.length) {
     deviceIdx = 0;
   }
 
@@ -18,6 +18,7 @@ function showDeviceTemperature (deviceIdx) {
 
     temperatureSensor.readTemperature(device.path)
       .then(celsius => {
+        log.info(`Displaying ${celsius}°C for ${device.location}.`);
         temperatureDisplay.displayTemperature(celsius)
 
         // After a configurable period, show the next device temperature.
@@ -27,11 +28,18 @@ function showDeviceTemperature (deviceIdx) {
 
   // Show the index.
   ledBackpack.clear();
+  ledBackpack.enableColon();
   ledBackpack.setDigit(0, deviceIdx);
 
   // Then show the temperature.
   setTimeout(showTemperature, config.displayIndexMilliseconds);
 }
 
-log.info(`Displaying temperatures from: ${_.map(config.devices, 'location').join(', ')}.`);
-showDeviceTemperature(0);
+ledBackpack.init(() => {
+  log.info(`Displaying temperatures from: ${_.map(config.devices, 'location').join(', ')}.`);
+  ledBackpack.enableColon();
+  ledBackpack.setBrightness(ledBackpack.MAX_BRIGHTNESS);
+  ledBackpack.setBlinkRate(ledBackpack.BLINKRATE_OFF);
+  showDeviceTemperature(0);
+});
+
