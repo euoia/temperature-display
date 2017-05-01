@@ -29,7 +29,7 @@ function showDeviceTemperature (deviceIdx) {
   // Show the index.
   ledBackpack.clear();
   ledBackpack.enableColon();
-  ledBackpack.setDigit(0, deviceIdx);
+  ledBackpack.setDigit(0, deviceIdx + 1);
 
   // Then show the temperature.
   setTimeout(showTemperature, config.displayIndexMilliseconds);
