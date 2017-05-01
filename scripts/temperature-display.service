@@ -1,0 +1,19 @@
+# systemd service file for temperature-display
+
+[Unit]
+Description=Temperature Display is a service to show temperatures read from one or more DS18B20 temperature sensors and display them on an i2c LED display.
+Documentation=https://github.com/euoia/temperature-display
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+LimitNOFILE=65536
+ExecStart=/home/pi/.nvm/versions/node/v6.9.5/bin/node -r /home/pi/temperature-display/node_modules/dotenv/config /home/pi/temperature-display/app.js dotenv_config_path=/home/pi/temperature-display/.env
+KillMode=control-group
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=temperature-display.service
+
