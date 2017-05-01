@@ -3,7 +3,7 @@ const log = require('./log.js');
 const config = require('./config.js');
 const temperatureSensor = require('rasp2c/temperature');
 const _ = require('lodash');
-const ledBackpack = require('ledBackpack');
+const ledBackpack = require('led-backpack');
 const temperatureDisplay = require('led-backpack/temperature');
 
 // Show the device index and then the device temperature.
