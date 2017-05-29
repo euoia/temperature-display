@@ -5,6 +5,17 @@ const temperatureSensor = require('@euoia/rasp2c/temperature');
 const _ = require('lodash');
 const ledBackpack = require('@euoia/led-backpack');
 const temperatureDisplay = require('@euoia/led-backpack/temperature');
+const process = require('process');
+
+function exitHandler() {
+  log.info('temperature-display shutting down');
+  ledBackpack.clear();
+  process.exit();
+}
+
+// Ensure the display is cleared when this process exits.
+process.on('SIGINT', exitHandler);
+process.on('SIGTERM', exitHandler);
 
 // Show the device index and then the device temperature.
 // After completion, call itself with the next index.
